@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { archivo, Person, Machine, Purchuse, Active } from '../../../core/models/Archivo.models';
+//import { archivo, Person, Machine, Purchuse, Active } from '../../../core/models/Archivo.models';
 import { ApiService } from '../../../core/services/service.service';
 import { ToastrService } from 'ngx-toastr';
 
