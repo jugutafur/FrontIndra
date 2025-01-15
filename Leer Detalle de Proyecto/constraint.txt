@@ -1,0 +1,159 @@
+select * from Persona
+select * from Tipo
+select * from Cargo
+select * from Ciudad
+select * from Maquinaria
+select * from Mueble
+
+--drop table activo
+
+create table activo(
+id int identity(1,1) primary key,
+tipo varchar(250) not null,
+ciudad varchar(250) not null,
+nombreResponsable varchar(250) not null,
+identificacionResponsable int not null,
+cargoResponsable varchar(250) not null,
+nombreActivo varchar(250) not null,
+descripcionActivo varchar(250) not null,
+dimensionesActivo varchar(250) not null,
+serialActivo varchar(250) not null,
+numeroInternoInventarioActivo varchar(250) not null,
+valorActivo int not null,
+fechaCompra date not null,
+constraint fk_tipo FOREIGN KEY (tipo) REFERENCES Tipo (nombreTipo),
+constraint fk_ciudad FOREIGN KEY (ciudad) REFERENCES Ciudad (nombreCiudad),
+--constraint fk_persona FOREIGN KEY (nombreResponsable) REFERENCES Persona (nombre),
+--constraint fk_identificacion FOREIGN KEY (identificacionResponsable) REFERENCES Persona (identificacion),
+constraint fk_cargo FOREIGN KEY (cargoResponsable) REFERENCES Cargo (nombreCargo),
+--constraint fk_serial FOREIGN KEY (serialActivo) REFERENCES Maquinaria (serial)
+)
+
+select * from activo
+
+insert into activo values
+('Muebles', 'Bogota', 'Roberto' , 10, 'Bodega', 'Escritorio', 'Descripcion de Escritorio', '200x50', 'Mue-01', 'nI-01', 45000, '1988/09/04')
+
+select * from Ciudad
+select * from Tipo
+select * from Cargo
+
+insert into Ciudad values
+('Paris')
+
+
+
+drop table Persona
+drop table Ciudad
+drop table Tipo
+drop table Maquinaria
+drop table Mueble
+drop table Cargo
+
+select * from Persona
+select * from Tipo
+select * from Cargo
+select * from Ciudad
+select * from Maquinaria
+select * from Mueble
+
+create table Persona(
+id int identity(1,1) primary key ,
+nombre varchar(250) not null,
+identificacion int not null
+)
+
+insert into Persona values 
+('felipe arias', 10 ),
+('camila ramirez', 20 ),
+('fabian lopez', 30 ),
+('carlos fernandez', 40 )
+
+
+create table Cargo(
+id int identity(1,1),
+nombreCargo varchar(250) 
+check(nombreCargo like 'Administracion' or nombreCargo like 'Bodega' or
+	  nombreCargo like 'Contabilidad' or nombreCargo like 'Recursos Humanos')
+primary key (nombreCargo)
+)
+
+insert into Cargo values 
+('Administracion' ),
+('Bodega'),
+('Contabilidad'),
+('Recursos Humanos')
+
+drop table Ciudad
+
+create table Ciudad(
+id int identity(1,1),
+nombreCiudad varchar(250) 
+check(nombreCiudad  like 'Bogota' or nombreCiudad like 'Medellin' or nombreCiudad 
+					like 'Cartagena' or nombreCiudad like 'Pasto')
+primary key (nombreCiudad)
+)
+
+insert into Ciudad values 
+('Bogota' ),
+('Medellin'),
+('Cartagena'),
+('Pasto')
+
+drop table Tipo
+
+create table Tipo(
+id int identity(1,1),
+nombreTipo varchar(250) 
+check(nombreTipo like 'Maquinaria' or nombreTipo like 'Muebles')
+primary key (nombreTipo)
+)
+
+insert into Tipo values 
+('Maquinaria' ),
+('Muebles')
+
+
+drop table Maquinaria
+
+create table Maquinaria(
+id int identity(1,1),
+nombreMaquinaria varchar(250),
+dimensiones varchar(250) not null,
+descripcion varchar(250) not null,
+serial varchar(250) not null,
+numeroInternoInventario varchar(250) not null,
+valor int not null,
+fechaCompra date not null,
+primary key (serial, numeroInternoInventario)
+)
+
+insert into Maquinaria values 
+('Taladro', '200x300', 'Descripcion de Taladro', 'a001', 'b001', 10000, '1988/09/24' ),
+('Sierra', '200x300', 'Descripcion de Sierra', 'a002', 'b002', 20000, '1988/09/24'),
+('Planeadora', '200x300', 'Descripcion de Planeadora', 'a003', 'b003', 30000, '1988/09/24' ),
+('SinFin', '200x300',  'Descripcion de SinFin', 'a004', 'b004', 40000, '1988/09/24'),
+('Pulidora', '200x300',  'Descripcion de Pulidora', 'a005', 'b005', 50000, '1988/09/24'),
+('Compresor' , '200x300', 'Descripcion de Compresor', 'a006', 'b006', 60000, '1988/09/24')
+
+drop table Mueble
+
+create table Mueble(
+id int identity(1,1),
+nombreMueble varchar(250) not null,
+dimensiones varchar(250) not null,
+descripcion varchar(250) not null,
+serial varchar(250) not null,
+numeroInternoInventario varchar(250) not null,
+valor int not null,
+fechaCompra date not null
+primary key (serial, numeroInternoInventario)
+)
+
+insert into Mueble values 
+('Sofa','200x300', 'Descripcion de Sofa', 'a001', 'b001', 10000, '1988/09/24' ),
+('Escritorio', '200x300', 'Descripcion de Escritorio', 'a002', 'b002', 10000, '1988/09/24' ),
+('Gabinete','200x300', 'Descripcion de Gabinete', 'a003', 'b003', 10000, '1988/09/24' ),
+('Archivador','200x300', 'Descripcion de Archivador', 'a004', 'b004', 10000, '1988/09/24' ),
+('Silla','200x300', 'Descripcion de Silla', 'a005', 'b005', 10000, '1988/09/24'  ),
+('Mesa','200x300', 'Descripcion de Mesa', 'a006', 'b006', 10000, '1988/09/24' )
